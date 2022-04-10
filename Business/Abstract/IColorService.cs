@@ -12,5 +12,6 @@ namespace Business.Abstract
     {
         List<Color> GetAll();
         List<Color> GetByName(string name);
+        Color GetById(int id);
     }
 }

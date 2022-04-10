@@ -36,11 +36,26 @@ namespace Business.Concrete
             return _brandDal.GetAll();
         }
 
+        public Brand GetById(int id)
+        {
+            return _brandDal.Get(b => b.BrandId == id);
+        }
+
         public List<Brand> GetByName(string name)
         {
             return _brandDal.GetAll(b => b.BrandName == name);
         }
 
-      
+        public void Update(Brand brand)
+        {
+            if (brand.BrandId == 1)
+            {
+                _brandDal.Update(brand);
+            }
+            else
+            {
+                Console.WriteLine("Marka guncellenmesi basarisiz");
+            }
+        }
     }
 }

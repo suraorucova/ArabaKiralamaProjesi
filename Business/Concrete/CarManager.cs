@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Entities;
 using DataAccess.Abstract;
 using Entities;
 using System;
@@ -30,6 +31,18 @@ namespace Business.Concrete
            }
         }
 
+        public void Delete(Car car)
+        {
+            if (car.ModelYear == 2007)
+            {
+                _carDal.Delete(car);
+            }
+            else
+            {
+                Console.WriteLine("2007 model araba bulunamadi");
+            }
+        }
+
         public List<Car> GetAll()
         {
             
@@ -44,6 +57,11 @@ namespace Business.Concrete
         public List<Car> GetById(int id)
         {
             return _carDal.GetAll(c => c.Id == id);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }

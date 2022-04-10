@@ -12,6 +12,9 @@ namespace Business.Abstract
         List<Brand> GetAll();
 
         List<Brand> GetByName(string name);
+        Brand GetById(int id);
+
+        void Update(Brand brand);
 
         void Add(Brand brand);
      
