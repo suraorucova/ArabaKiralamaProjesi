@@ -13,11 +13,11 @@ namespace Business.Constants
         public static string CarDeleted = "Araba silindi";
         public static string CarAddedInvalid = "Araba eklenmesi basarisiz";
         public static string CarDeletedInvalid = "Araba silinmesi basarisiz";
-        internal static string MaintenanceTime = "Sitem bakimda";
-        internal static string CarListed="Arabalar listelendi";
-        internal static string BrandAdded="Marka eklendi";
-        internal static string BrandAddedInvalid="Marka eklenmesi basarisiz";
-        internal static string BrandUpdated="Marka guncellendi";
-        internal static string BrandUpdatedInvalid="Marka guncellenmesi basarisiz";
+        public static string MaintenanceTime = "Sitem bakimda";
+        public static string CarListed="Arabalar listelendi";
+        public static string BrandAdded="Marka eklendi";
+        public static string BrandAddedInvalid="Marka eklenmesi basarisiz";
+        public static string BrandUpdated="Marka guncellendi";
+        public static string BrandUpdatedInvalid="Marka guncellenmesi basarisiz";
     }
 }
