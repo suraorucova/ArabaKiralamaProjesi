@@ -1,0 +1,46 @@
+﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
+using Entities.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Business.Concrete
+{
+    public class RentalManager : IRentalService
+    {
+        IRentalDal _rentalDal;
+        public RentalManager(IRentalDal rentalDal)
+        {
+            _rentalDal = rentalDal;
+        }
+        public IResult Add(Rental rental)
+        {
+            if (rental.ReturnDate == null)
+            {
+                return new ErrorResult(Messages.ReturnInvalid);
+            }
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
+        }
+
+        public IResult Delete(Rental rental)
+        {
+            // Eğer araba teslim edilmişse onu kayıtlardan silsin istedim
+            if (rental.ReturnDate != null)
+            {
+                return new SuccessResult(Messages.RentalDelete);
+            }
+            return new ErrorResult(Messages.RentalDeleteInvalid);
+        }
+
+        public IDataResult<List<Rental>> GetAll()
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
+        }
+    }
+}

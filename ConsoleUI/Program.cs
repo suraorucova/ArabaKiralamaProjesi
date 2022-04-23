@@ -10,11 +10,71 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
-            ColorTest();
+            CarTest();
+            //ColorTest();
             //BrandTest();
+            //UserTest();
+            // CustomerTest();
+           // RentalTest();
 
             Console.ReadLine();
+        }
+
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EFRentalDal());
+            var result = rentalManager.GetAll();
+            if (result.Success == true)
+            {
+                foreach (var rental in result.Data)
+                {
+                    Console.WriteLine(rental.CarId);
+                }
+            }
+           
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EFCustomerDal());
+            var result = customerManager.GetAll();
+            if (result.Success == true)
+            {
+                foreach (var customer in result.Data)
+                {
+                    Console.WriteLine(customer.UserId);
+                }
+
+            }
+           
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EFUserDal());
+            var result = userManager.GetAll();
+            if (result.Success == true)
+            {
+                foreach (var user in result.Data)
+                {
+                    Console.WriteLine(user.FirstName + " " + user.LastName);
+                }
+            }
+
+            User user1 = new User()
+            {
+                
+                FirstName = "Selim",
+                LastName = "Uzun",
+                Email = "selim@gmail.com"
+            ,
+                Password = "3456selim"
+            };
+            var result2 = userManager.Add(user1);
+            if (result2.Success == true)
+            {
+                Console.WriteLine(result2.Message);
+            }
         }
 
         private static void BrandTest()
@@ -101,14 +161,14 @@ namespace ConsoleUI
             var result2 = carManager.GetByDailyPrice(2000,3000);
             if (result2.Success == true)
             {
-                foreach (var car in result2.Data)
-                {
+               foreach (var car in result2.Data)
+               {
                    Console.WriteLine(car.Description);
                 }
             }
             else
             {
-                Console.WriteLine(result2.Message);
+               Console.WriteLine(result2.Message);
             }
 
             var result3 = carManager.GetAll();
@@ -131,7 +191,7 @@ namespace ConsoleUI
                 {
                     Console.WriteLine(car.Id + "/" + car.Description +
                         "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
-                }
+              }
             }
             else
             {
