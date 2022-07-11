@@ -10,10 +10,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarTest();
             //ColorTest();
             //BrandTest();
-            //UserTest();
+            UserTest();
             // CustomerTest();
            // RentalTest();
 
@@ -52,28 +52,27 @@ namespace ConsoleUI
         private static void UserTest()
         {
             UserManager userManager = new UserManager(new EFUserDal());
-            var result = userManager.GetAll();
-            if (result.Success == true)
-            {
-                foreach (var user in result.Data)
-                {
-                    Console.WriteLine(user.FirstName + " " + user.LastName);
-                }
-            }
-
             User user1 = new User()
             {
                 
-                FirstName = "Selim",
-                LastName = "Uzun",
-                Email = "selim@gmail.com"
-            ,
-                Password = "3456selim"
+                FirstName = "Kerim",
+                LastName = "Heyderli",
+                Email = "xxx@gmail.com",
+                Password = "kerim12345"
             };
-            var result2 = userManager.Add(user1);
-            if (result2.Success == true)
+
+            var result = userManager.Add(user1);
+            if (result.Success==true)
             {
-                Console.WriteLine(result2.Message);
+                Console.WriteLine(result.Message+": "+user1.FirstName);
+            }
+            var result2 = userManager.GetAll();
+            if (result2.Success==true)
+            {
+                foreach (var user in result2.Data)
+                {
+                    Console.WriteLine(user.FirstName);
+                }
             }
         }
 
@@ -123,17 +122,14 @@ namespace ConsoleUI
             {
                foreach (var color in result.Data)
                {
-                   Console.WriteLine(color.ColorName);
+                  Console.WriteLine(color.ColorName);
                 }
             }
-
-            var result2 = colorManager.GetByName("Siyah");
+            Color color1 = new Color() { ColorId = 8, ColorName = "Boz" };
+            var result2 = colorManager.Add(color1);
             if (result2.Success==true)
             {
-               foreach (var color in result2.Data)
-               {
-                   Console.WriteLine(color.ColorId);
-               }
+                Console.WriteLine(result2.Message+":"+color1.ColorName);
             }
 
            
@@ -144,32 +140,32 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EFCarDal());
-            var result = carManager.GetById(4);
-            if (result.Success==true)
-            {
-                foreach (var car in result.Data)
-                {
-                   Console.WriteLine(car.Description);
-                }
-            }
+            //var result = carManager.GetById(4);
+            //if (result.Success==true)
+            //{
+            //    foreach (var car in result.Data)
+            //    {
+            //       Console.WriteLine(car.Description);
+            //    }
+            //}
 
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+            //else
+            //{
+            //    Console.WriteLine(result.Message);
+            //}
 
-            var result2 = carManager.GetByDailyPrice(2000,3000);
-            if (result2.Success == true)
-            {
-               foreach (var car in result2.Data)
-               {
-                   Console.WriteLine(car.Description);
-                }
-            }
-            else
-            {
-               Console.WriteLine(result2.Message);
-            }
+            //var result2 = carManager.GetByDailyPrice(2000,3000);
+            //if (result2.Success == true)
+            //{
+            //   foreach (var car in result2.Data)
+            //   {
+            //       Console.WriteLine(car.Description);
+            //    }
+            //}
+            //else
+            //{
+            //   Console.WriteLine(result2.Message);
+            //}
 
             var result3 = carManager.GetAll();
             if (result3.Success==true)
@@ -184,31 +180,31 @@ namespace ConsoleUI
                 Console.WriteLine(result3.Message);
             }
 
-            var result4 = carManager.GetCarDetails();
-            if (result4.Success==true)
-            {
-                foreach (var car in result4.Data)
-                {
-                    Console.WriteLine(car.Id + "/" + car.Description +
-                        "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
-              }
-            }
-            else
-            {
-               Console.WriteLine(result4.Message);
-            }
-            Car car1 = new Car() { Id = 7, BrandId = 1, ColorId = 2, DailyPrice = 0, ModelYear = 2017, Description = "2017 model BMW" };
-            var result5 = carManager.Add(car1);
-            if (result5.Success==true)
-            {
-                Console.WriteLine(result5.Message);
-            }
+            //var result4 = carManager.GetCarDetails();
+            //if (result4.Success==true)
+            //{
+            //    foreach (var car in result4.Data)
+            //    {
+            //        Console.WriteLine(car.Id + "/" + car.Description +
+            //            "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+            //  }
+            //}
+            //else
+            //{
+            //   Console.WriteLine(result4.Message);
+            //}
+            //Car car1 = new Car() { Id = 7, BrandId = 1, ColorId = 2, DailyPrice = 0, ModelYear = 2017, Description = "2017 model BMW" };
+            //var result5 = carManager.Add(car1);
+            //if (result5.Success==true)
+            //{
+            //    Console.WriteLine(result5.Message);
+            //}
             
-            var result6= carManager.Delete(car1);
-            if (result6.Success==true)
-            {
-                Console.WriteLine(result6.Message);
-            }
+            //var result6= carManager.Delete(car1);
+            //if (result6.Success==true)
+            //{
+            //    Console.WriteLine(result6.Message);
+            //}
 
             
            
