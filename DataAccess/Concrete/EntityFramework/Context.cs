@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Core.Entities;
+using Entities;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,18 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=WIN-TVEA2RTCGA3;Database=ArabaKiralama; Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=WIN-TVEA2RTCGA3;Database=CarRentalDatabase; Trusted_Connection=true");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>(
+                c =>
+                {
+                    c.HasNoKey();
+                 
+                }
+                );
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -22,6 +34,10 @@ namespace DataAccess.Concrete.EntityFramework
       
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<ColorImage> ColorImages { get; set; }
+
+        
 
        
         
